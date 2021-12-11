@@ -2,7 +2,11 @@ package components
 
 import (
 	"codetube.cn/interface-web/interfaces"
+	"codetube.cn/interface-web/resources"
+	_ "codetube.cn/interface-web/resources"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"html/template"
 )
 
 var RouterEngine = gin.Default()
@@ -24,6 +28,13 @@ type router struct {
 }
 
 func NewRouter(version string) *router {
+	//加载 HTML 模板
+	t, err := template.ParseFS(resources.HtmlTemplates, "templates/*/*")
+	if err != nil {
+		fmt.Println(err)
+	}
+	RouterEngine.SetHTMLTemplate(t)
+
 	//默认 path 带版本号的路由分组
 	groups := []*gin.RouterGroup{
 		RouterEngine.Group("/" + version),
@@ -42,8 +53,6 @@ func (r *router) Load(routes ...func(group *gin.RouterGroup)) {
 			r(g)
 		}
 	}
-	//加载 HTML 模板
-	RouterEngine.LoadHTMLGlob("resources/templates/*/*")
 }
 
 func (r router) getApiHandlers(api interfaces.ApiInterface) []gin.HandlerFunc {

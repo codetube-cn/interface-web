@@ -14,4 +14,5 @@ var LoadRoutes = []func(group *gin.RouterGroup){
 	HtmlRegister,
 	UserRegister,
 	CourseRegister,
+	UserRegisterRegister,
 }

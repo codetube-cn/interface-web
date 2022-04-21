@@ -18,7 +18,7 @@ func Start() {
 		//加载各版本的 API 路由
 		v1.ApiRouter.Load(v1.LoadRoutes...)
 
-		components.RouterEngine.Run(":8080")
+		components.RouterEngine.Run("0.0.0.0:8080")
 	}()
 	//监听事件
 	go func() {

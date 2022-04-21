@@ -6,6 +6,7 @@ import (
 	"codetube.cn/interface-web/interfaces"
 	service_user_register "codetube.cn/proto/service-user-register"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 )
 
@@ -31,6 +32,7 @@ func (u *RegisterUsernamePassword) Handler() {
 		if err != nil {
 			u.Api.FailureWithStatus(codes.ServiceRequestFail).Abort()
 			//@todo 记录错误日志
+			log.Println(err)
 			return
 		}
 		u.response = response
@@ -60,7 +62,7 @@ func (u *RegisterUsernamePassword) Response() {
 	u.WithResponse(func(c *gin.Context) {
 		u.Api.WithStatus(int(u.response.GetStatus())).
 			WithMessage(u.response.GetMessage()).
-			WithData(&map[string]string{"username": u.response.GetUsername()}).
+			WithData(&map[string]int64{"id": u.response.GetId()}).
 			Response()
 	})
 }

@@ -14,7 +14,7 @@ func init() {
 	//加载 .env 文件环境变量
 	_, err := os.Stat(".env")
 	if err == nil {
-		err := godotenv.Load()
+		err = godotenv.Load()
 		if err != nil {
 			log.Fatal("Error loading .env file")
 		}

@@ -29,7 +29,7 @@ type router struct {
 
 func NewRouter(version string) *router {
 	//加载 HTML 模板
-	t, err := template.ParseFS(resources.HtmlTemplates, "templates/*/*")
+	t, err := template.New("").Funcs(template.FuncMap{}).ParseFS(resources.HtmlTemplates, "templates/*/*")
 	if err != nil {
 		fmt.Println(err)
 	}

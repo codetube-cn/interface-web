@@ -8,6 +8,6 @@ import (
 func UserRegisterRegister(group *gin.RouterGroup) {
 	userGroup := ApiRouter.Group(group, "/user/register")
 	{
-		ApiRouter.Post("", user.ApiRegisterUsernamePassword(), userGroup)
+		ApiRouter.Post("", user.ApiRegister(), userGroup)
 	}
 }

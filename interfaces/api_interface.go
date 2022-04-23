@@ -103,16 +103,16 @@ func (t *ApiInterfaceTrait) GetHandlers() []gin.HandlerFunc {
 	return t.Handlers
 }
 
-// HtmlResponse API 响应数据处理
+// ApiResponse API 响应数据处理
 type ApiResponse struct {
-	status  int
-	message string
-	data    interface{}
-	context *gin.Context
+	status      int
+	message     string
+	data        interface{}
+	context     *gin.Context
 	defaultData interface{}
 }
 
-// NewHtmlResponse 实例化 HtmlResponse
+// NewApiResponse 实例化 ApiResponse
 func NewApiResponse(c *gin.Context) *ApiResponse {
 	return &ApiResponse{status: codes.Success, message: "success", defaultData: map[string]interface{}{}, context: c}
 }

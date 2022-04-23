@@ -72,7 +72,7 @@ func (r *Register) Response() {
 	r.WithResponse(func(c *gin.Context) {
 		r.Api.WithStatus(int(r.response.GetStatus())).
 			WithMessage(r.response.GetMessage()).
-			WithData(&map[string]int64{"id": r.response.GetId()}).
+			WithData(&map[string]string{"id": r.response.GetId()}).
 			Response()
 	})
 }

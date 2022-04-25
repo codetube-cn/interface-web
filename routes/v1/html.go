@@ -6,7 +6,7 @@ import (
 )
 
 func HtmlRegister(group *gin.RouterGroup) {
-	htmlGroup := ApiRouter.Group(group, "/html")
+	htmlGroup := ApiRouter.Group(group, "/")
 	{
 		ApiRouter.Get("/", html.PageIndex(), htmlGroup)
 	}

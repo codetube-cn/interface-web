@@ -1,12 +1,67 @@
 {{define "v1/header"}}<!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>首页 | CodeTube教育</title>
-  <meta name="keywords" content="{{.keywords}}" />
-  <meta name="description" content="{{.description}}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{.meta_title}}</title>
+  <meta name="keywords" content="{{.meta_keywords}}" />
+  <meta name="description" content="{{.meta_description}}" />
+  <link rel="stylesheet" href="//static.codetube.com/css/bulma.min.css">
+  <link rel="stylesheet" href="//static.codetube.com/css/app.css">
 </head>
 <body>
-<div><h1>this is header</h1></div>
+<div class="navbar header-navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-logo" href="/"><strong>CodeTube</strong></a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+         data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-text-light" href="/">首页</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link has-text-light" href="" style="background: none;">课程</a>
+          <div class="navbar-dropdown">
+            {{if .categories}}
+            {{range $key, $category := .categories }}
+            <a class="navbar-item" href="/">{{$category.Name}}</a>
+            {{end}}
+            {{end}}
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="/">线下培训</a>
+          </div>
+        </div>
+        <a class="navbar-item has-text-light" href="/">社区</a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field is-grouped">
+            <div class="control has-icons-right">
+              <input type="text" class="input is-small" style="width: 10rem;" placeholder="搜索你感兴趣的内容...">
+              <span class="icon is-right"><i class="fa fa-search"></i></span>
+            </div>
+            <div class="control"><input type="submit" class="button is-info is-small" value="搜索"></div>
+          </div>
+        </div>
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary is-small">
+              <strong>注册</strong>
+            </a>
+            <a class="button is-light is-small">
+              登录
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {{end}}

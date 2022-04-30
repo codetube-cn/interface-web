@@ -1,4 +1,70 @@
 {{define "v1/index"}}{{template "v1/header" .}}
-<div>这是首页内容</div>
-<div>UserId: {{$.userid}}</div>
+<section class="hero is-dark">
+    <div class="hero-body">
+        <div class="container">
+            <div class="intro-columns">
+                <div class="intro-column is-content">
+                    <div class="intro-content">
+                        <div class="pb-2"><h1 class="title intro-title">
+                            <strong>给</strong>每一个人提供<strong>学</strong>习编程的精品课</h1>
+                        </div>
+                        <div class="mt-3"><h1 class="title intro-title">顺便找一个 <strong>月薪两万</strong> 的工作！</h1></div>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="tabs is-centered mt-4">
+    <ul>
+        <li class="is-active"><a href="">精选推荐</a></li>
+        {{if .categories}}
+        {{range $key, $category := .categories }}
+        <li class=""><a href="">{{$category.Name}}</a></li>
+        {{end}}
+        {{end}}
+    </ul>
+</div>
+
+<section class="section courses-list">
+    <div class="container">
+        {{if .recommended_courses}}
+        {{$a := .recommended_courses|len}}
+        {{range $key, $course := .recommended_courses }}
+            {{if chunkStart 4 $key}}
+        <div class="columns">
+            {{end}}
+            <div class="column is-3">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-16by9">
+                            <a href="{{courseUrl $course.UrlName $course.Id}}" title="{{$course.Name}}"><img src="{{$course.Cover}}" alt="{{$course.Name}}"></a>
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content mb-2">
+                            <div style="height: 44px;line-height:22px;overflow: hidden;">
+                                <a href="{{courseUrl $course.UrlName $course.Id}}" title="{{$course.Name}}" class="has-text-dark">{{$course.Name}}</a>
+                            </div>
+                        </div>
+                        <footer class="card-footer columns" style="border:none;padding:0">
+                            <div class="column" style="color:#999;font-size:.9rem">
+                                共 {{$course.ChaptersTotal}} 课时 | 老戴
+                            </div>
+                            <div class="column has-text-right" style="color:#f00;font-size:.9rem">
+                                ¥{{$course.Price}}
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            {{if chunkEnd 4 $key $a}}
+        </div>
+            {{end}}
+        {{end}}
+        {{end}}
+    </div>
+</section>
 {{template "v1/footer" .}}{{end}}

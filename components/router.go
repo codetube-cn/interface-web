@@ -2,6 +2,7 @@ package components
 
 import (
 	"codetube.cn/interface-web/interfaces"
+	"codetube.cn/interface-web/libraries/template_funcs"
 	"codetube.cn/interface-web/resources"
 	_ "codetube.cn/interface-web/resources"
 	"fmt"
@@ -29,7 +30,7 @@ type router struct {
 
 func NewRouter(version string) *router {
 	//加载 HTML 模板
-	t, err := template.New("").Funcs(template.FuncMap{}).ParseFS(resources.HtmlTemplates, "templates/*/*")
+	t, err := template.New("html").Funcs(template_funcs.FuncMap).ParseFS(resources.HtmlTemplates, "templates/*/*")
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -31,7 +31,7 @@
           <div class="navbar-dropdown">
             {{if .categories}}
             {{range $key, $category := .categories }}
-            <a class="navbar-item" href="/">{{$category.Name}}</a>
+            <a class="navbar-item" href="{{categoryUrl $category.Id $category.UrlName 1}}">{{$category.Name}}</a>
             {{end}}
             {{end}}
             <hr class="navbar-divider">

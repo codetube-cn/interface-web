@@ -6,5 +6,7 @@ var FuncMap = template.FuncMap{
 	"chunkStart": ChunkStart,
 	"chunkEnd":   ChunkEnd,
 
+	"categoryUrl": CategoryUrl,
+
 	"courseUrl": CourseUrl,
 }

@@ -1,4 +1,4 @@
-{{define "v1/index"}}{{template "v1/header" .}}
+{{define "v1/category"}}{{template "v1/header" .}}
 <section class="hero is-dark">
     <div class="hero-body">
         <div class="container">
@@ -17,22 +17,19 @@
     </div>
 </section>
 
-<div class="tabs is-centered mt-4">
+<nav class="container breadcrumb is-medium mt-4 mb-0" aria-label="breadcrumbs">
     <ul>
-        <li class="is-active"><a href="">精选推荐</a></li>
-        {{if .categories}}
-        {{range $key, $category := .categories }}
-        <li class=""><a href="{{categoryUrl $category.Id $category.UrlName 1}}">{{$category.Name}}</a></li>
-        {{end}}
-        {{end}}
+        <li><a href="#" class="has-text-grey">首页</a></li>
+        <li><a href="#" class="has-text-grey">课程</a></li>
+        <li class="is-active"><a href="{{categoryUrl .category.Id .category.UrlName 1}}" class="has-text-grey" aria-current="page">{{.category.Name}}</a></li>
     </ul>
-</div>
+</nav>
 
 <section class="section courses-list">
     <div class="container">
-        {{if .recommended_courses}}
-        {{$a := .recommended_courses|len}}
-        {{range $key, $course := .recommended_courses }}
+        {{if .courses}}
+        {{$a := .courses|len}}
+        {{range $key, $course := .courses }}
             {{if chunkStart 4 $key}}
         <div class="columns">
             {{end}}
@@ -65,6 +62,16 @@
             {{end}}
         {{end}}
         {{end}}
+
+        <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+            <ul class="pagination-list">
+                <a {{if ne .pagination.CurrentPage .pagination.FirstPage}}href="{{categoryUrl .category.Id .category.UrlName .pagination.FirstPage}}"{{else}} disabled="disabled" {{end}} class="pagination-link">第一页</a>
+                <a {{if gt .pagination.PrePage 0}}href="{{categoryUrl .category.Id .category.UrlName .pagination.PrePage}}"{{else}} disabled="disabled" {{end}} class="pagination-link">上一页</a>
+                <li class="mr-6 ml-6">{{.pagination.CurrentPage}} / {{.pagination.Pages}}</li>
+                <a {{if gt .pagination.NextPage 0}}href="{{categoryUrl .category.Id .category.UrlName .pagination.NextPage}}"{{else}} disabled="disabled" {{end}} class="pagination-link">下一页</a>
+                <a {{if ne .pagination.CurrentPage .pagination.LastPage}}href="{{categoryUrl .category.Id .category.UrlName .pagination.LastPage}}"{{else}} disabled="disabled" {{end}} class="pagination-link">最后一页</a>
+            </ul>
+        </nav>
     </div>
 </section>
 {{template "v1/footer" .}}{{end}}
